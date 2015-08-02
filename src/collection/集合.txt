@@ -1,0 +1,28 @@
+﻿Java集合概述。
+为了保存数量不确定的数据，以及保存具有映射关系的数据（也被称为关联数组），java提供集合类。集合类主要负责保存，盛装其他数据，因此集合类
+也被称为容器类。所以集合类偶位于java.util包下。
+
+集合类和数组不一样，数组元素既可以是基本类型的值，也可以是对象（实际上保存的是对象的引用变量）；而集合里只能保存对象（实际上也是保存对象的引
+用变量，但通常习惯上认为集合里保存的是对象）。
+
+Java的集合类主要有两个接口派生而出:Collection和Map，Collection和Map是Java集合框架的根接口。这两个接口又包含了一些子类接口或者实
+现类。
+
+Map保存的每项数据都是key-value对，key不可重复。
+
+Collection和Iterator接口。
+
+Collection是List和Set和Queue接口的父接口，该接口里定义的方法即可用于操作Set集合，也可用于操作List集合和Queue集合。
+Iterator接口也是Java集合框架的成员，但与Collection系统，Map系列的集合不一样：Collection系列集合，Map系列集合主要用于盛装其他对
+象。Iterator则主用用于便利Collection中的元素，Iterator也被称为迭代器。
+
+Iterator必须依附于Collection对象。Iterator提供两个方法来访问Collection集合里的元素，并可通过remo方法来删除集合中上一次next
+方法返回的元素。
+
+对迭代变量book进行赋值，再次输出books集合时集合里的值没有任何改变。由此得出：使用Iterator对集合元素进行迭代时，Iterator并 不是把集
+合本身传给了迭代变量，而是把集合元素的值传给了迭代 变量，所以修改迭代变量的值对元素本身没有任何改变。
+
+Iterator迭代器采用的是快速失败（fail-fast）机制，一旦在迭代过程中检测到该集合已经被修改（通常是程序中的其他线程修改），程序立即引发
+ConcurrentModificationException，而不是显示修改后的结果，这样可以避免共享资源而引发的潜在问题。
+
+使用foreach循环遍历集合元素。

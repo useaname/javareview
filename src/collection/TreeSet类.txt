@@ -1,0 +1,39 @@
+﻿TreeSet类是SortedSet接口的唯一实现。可以确保元素处于排序状态。
+TreeSet采用红黑树的数据结构对元素进行排序。支持两种排序，自然排序和定制排序。
+
+自然排序：
+ TreeSet会调用compareTo(Object obj)方法来比较元素之间的大小关系，然后将元素按升序排列。
+ Java提供了一个Comparable接口，该接口里定义了一个compareTo(Object obj)方法，该方法返回一个整数值，当一个对象调用该方法与另一个
+   对象进行比较，如obj1.compareTo(obj2)如果该方法返回0，则表明这两个对象相等，如果该方法返回一个正数，则表明obj1大于obj2，如果
+   返回一个负数，则表明obj1小于obj2。
+	
+Java的一些常用类已经实现了Comparable接口，并提供了比较大小的标准，下面是现实Comparable接口的常用类：
+--》BigDecimal,BigInteger以及所有数组型对应包装类，按他们对应的数值的大小进行比较。
+--》Character:按字符的unicode值进行比较。
+--》Boolean:true对应的包装类实例大于false对应的包装类实例
+--》String:按字符中字符的unicode值进行比较
+--》Date，time后面的时间，日期比前面的时间,日期大
+
+如果试图把一个对象添加进TreeSet时，则该对象必须实现Comparable接口，否则程序会抛出异常。
+向TreeSet中添加元素,只有第一个元素无需事先实现Comparable接口，后面添加元素都必须实现Comparable接口，当然这也不是一种好做法，当试图
+从TreeSet中取出元素时，依然会引发ClassCastException。
+
+大部分类在实现compareTo(Object obj),都需要将比较对象obj强制类型转换成相同类型，因为只有相同类型的两个实例才会比较大小。当试图把一个
+对象添加到TreeSet集合中其他元素与该元素时同一个类的实例。也就是说，向TreeSet中添加到应该是同一个类的对象。
+
+如果向TreeSet集合中添加对象时，如果该对象是程序员自定义类的对象，则可以向TreeSet中添加多种类型的对下岗，前提是用户自定义类实现类
+Comparable接口，实现该接口时四号线compareTo(Object obj)方法时没用进行强制转换，但当试图操作TreeSet里的集合数据时，不同类型的元
+素依然会发生ClassCasetException.
+
+当把一个对象加入TreeSet集合中时，TreeSet调用该对象的compareTo(Object obj)方法与容器中的其他对象比较大小，然后根据红黑树算法决定
+他们的储存位置。如果两个对象通过compareTo(Object obj)比较相等，TreeSet即认为他们应存储同一位置。
+
+对于TreeSet集合而言，它判断两个对象不相等的标准是：两个对象通过equals方法比较返回false，或通过compareTo(Object obj)比较没有返回
+0--即使两个对象是同一个对象，TreeSet会把它当成两个对象进行处理。
+
+定制排序：
+需要定制排序，如降序，需要Comparator接口的帮助，该接口里包含一个int compare(T o1,T o2)方法，该方法用于比较o1和o2的大小:如果该方
+法返回正整数，则表明o1大于o2，如果该方法返回0，则o1等于o2，如果该方法返回负数，则表明o1小于o2。
+
+如果需要定制排序，则需要在创建TreeSet集合对象时，并提供一个Comparator对象与该TreeSet集合关联，由该Comparator对象负责集合元素的排序
+逻辑。
