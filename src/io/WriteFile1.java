@@ -15,9 +15,10 @@ public class WriteFile1 {
 		int size = 0;
 		while ((size = fis.read(bbuf)) > 0) {
 //			System.out.println(new String(bbuf,0,size));
+			//每读取一次,即写入了一次文件
 			fos.write(bbuf,0,size);
 		}
-		fis.close();
+		fis.close();fos.close();
 	}
 
 }
